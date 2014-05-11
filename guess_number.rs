@@ -9,11 +9,18 @@ fn main() {
     let x = random::<int>();
     let mut reader = BufferedReader::new(io::stdin());
     while true {
-        let line = reader.read_line().unwrap();
-        let num = from_str::<int>(line.slice_to(line.len() - 1));
-        match num {
-            Some(_number_string) => println!("Well, it was a number."),
-            None                => println!("Doesn't count.")
+        let line_result = reader.read_line();
+        if line_result.is_ok() {
+            let line = line_result.unwrap();
+            let num = from_str::<int>(line.slice_to(line.len() - 1));
+            match num {
+                Some(number_string) => println!("Well, it was a number."),
+                None                => println!("Doesn't count.")
+            }
+        }
+        else {
+            println!("An error occurred.");
+            break;
         }
     }
 }
