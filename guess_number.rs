@@ -14,9 +14,8 @@ fn main() {
             let line = line_result.unwrap();
             let num = from_str::<int>(line.slice_to(line.len() - 1));
             match num {
-                Some(x) => break,
-                Some(_number_string) => println!("Well, it was a number."),
-                None                 => println!("Doesn't count.")
+                Some(number_string) => if number_string == x {println!("Right!"); break;} else {println!("Wrong!")},
+                None                => println!("Doesn't count.")
             }
         }
         else {
